@@ -1,0 +1,8 @@
+# Build-Artefakte des Buch-Exports
+.build/
+# Spell-Kompilate
+*.spl
+# Editor-/OS-Müll
+*.swp
+*~
+.DS_Store
