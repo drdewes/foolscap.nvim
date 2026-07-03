@@ -22,7 +22,7 @@ function M.setup(cfg)
   local lang = langs[1]
 
   -- Persistenter Speicher (Wörterbuch / verborgene Fehlalarme / deaktivierte Regeln):
-  local dir = vim.fn.stdpath("state") .. "/ribbon"
+  local dir = vim.fn.stdpath("state") .. "/foolscap"
   local file = dir .. "/ltex.json"
   vim.fn.mkdir(dir, "p")
   local function load()
@@ -57,7 +57,7 @@ function M.setup(cfg)
   vim.lsp.config("ltex", {
     cmd = { cmd },
     filetypes = cfg.filetypes,
-    root_markers = { ".git", ".ribbon" },
+    root_markers = { ".git", ".foolscap" },
     get_language_id = function(_, ft)
       if ft == "markdown" or ft == "vimwiki" or ft == "text" then return "markdown" end
       return ft

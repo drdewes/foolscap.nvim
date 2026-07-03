@@ -12,14 +12,14 @@ local function chrome()
 end
 
 function M.run()
-  local cfg = require("ribbon.config").options.build
+  local cfg = require("foolscap.config").options.build
   local src = vim.api.nvim_buf_get_name(0)
   if src == "" then
-    vim.notify("Ribbon: Datei hat keinen Namen – erst speichern.", vim.log.levels.WARN)
+    vim.notify("Foolscap: Datei hat keinen Namen – erst speichern.", vim.log.levels.WARN)
     return
   end
   if not has("pandoc") then
-    vim.notify("Ribbon: pandoc nicht gefunden (für den Export nötig).", vim.log.levels.ERROR)
+    vim.notify("Foolscap: pandoc nicht gefunden (für den Export nötig).", vim.log.levels.ERROR)
     return
   end
   vim.cmd("silent! write")
@@ -50,9 +50,9 @@ function M.run()
   end
 
   if #made > 0 then
-    vim.notify("Ribbon: gebaut → " .. table.concat(made, "  "))
+    vim.notify("Foolscap: gebaut → " .. table.concat(made, "  "))
   else
-    vim.notify("Ribbon: Export fehlgeschlagen (siehe :messages).", vim.log.levels.ERROR)
+    vim.notify("Foolscap: Export fehlgeschlagen (siehe :messages).", vim.log.levels.ERROR)
   end
 end
 

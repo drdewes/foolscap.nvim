@@ -1,0 +1,45 @@
+*foolscap.txt*   Ein Schreibwerkzeug für neovim – Schreibmaschine & WordStar
+
+==============================================================================
+ÜBERSICHT                                                          *foolscap*
+
+Foolscap macht neovim zu einem ruhigen Schreibprogramm: Prosa-Modus, zentrierte
+Spalte, monochromer Schreibmaschinen-Look mit Schreibmaschinen-Scrollen,
+mehrsprachige Grammatikprüfung, Wortziele und Buch-Export nach EPUB/PDF.
+
+==============================================================================
+SETUP                                                        *foolscap-setup*
+
+>lua
+    require("foolscap").setup({
+      languages  = { "de-DE", "en-US" },
+      theme      = "amber",   -- amber | green | paper | none
+      width      = 65,
+      goal       = 1000,
+      keymaps    = false,
+    })
+<
+
+==============================================================================
+BEFEHLE                                                   *foolscap-commands*
+
+:Foolscap            Schreibraum an/aus (Prosa + Fokus + Schreibmaschine + Thema)
+:FoolscapProse       Prosa-Modus an/aus
+:FoolscapFocus       zentrierten Fokus an/aus
+:FoolscapProgress    Wort-Fortschritt zeigen
+:FoolscapGoal {n}    Tagesziel setzen
+:FoolscapGrammar     Grammatik-Check an/aus
+:FoolscapLanguage {lang}  Grammatiksprache umschalten (z. B. en-US)
+:FoolscapBuild       Buch als EPUB/PDF bauen
+
+==============================================================================
+GESUNDHEIT                                                  *foolscap-health*
+
+:checkhealth foolscap   prüft neovim-Version, ltex, pandoc, Chrome/Chromium.
+
+==============================================================================
+LIZENZ                                                     *foolscap-license*
+
+MIT. Dank an LARBS, Goyo, vim-pencil, ltex-ls(-plus).
+
+vim:tw=78:ts=8:ft=help:norl:

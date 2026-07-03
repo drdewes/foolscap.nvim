@@ -1,4 +1,4 @@
--- Ribbon – Konfiguration & Vorgaben.
+-- Foolscap – Konfiguration & Vorgaben.
 local M = {}
 
 M.defaults = {

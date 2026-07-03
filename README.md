@@ -1,13 +1,15 @@
-# Ribbon
+# Foolscap
 
 > Ein Schreibwerkzeug für neovim – mit dem Gefühl von **Schreibmaschine** und **WordStar**.
 > Von der leeren Seite bis zum fertigen **EPUB/PDF**. Für Menschen, die schreiben.
 
-*(„Ribbon" = das Farbband der Schreibmaschine. Arbeitstitel – der Name kann sich noch ändern.)*
+*(„Foolscap" = ein altes englisches Papierformat, benannt nach dem Narrenkappen-Wasserzeichen. Der leere Bogen, der auf dich wartet.)*
+
+> ⚠️ **Frühe Version (v0.1).** Es funktioniert, aber es steckt bestimmt noch der eine oder andere Fehler drin, den ich noch nicht gefunden habe. Rückmeldungen und Fehlerberichte sind sehr willkommen – gern über die [Issues](../../issues).
 
 ---
 
-## Warum Ribbon?
+## Warum Foolscap?
 
 Die einzelnen Bausteine gibt es längst (Goyo, vim-pencil, ltex …). Was fehlte, war ein **stimmiges Ganzes**: ein ruhiges, ablenkungsfreies Schreibprogramm auf Vim-Basis, das
 
@@ -37,7 +39,7 @@ Du schreibst in **Markdown** – schlicht, zukunftssicher, überall lesbar.
 - *(optional, für Grammatik)* [`ltex-ls-plus`](https://github.com/ltex-plus/ltex-ls-plus) im PATH – am einfachsten der Release **mit gebündeltem Java** (kein System-Java nötig)
 - *(optional, für Export)* `pandoc`; für PDF zusätzlich `chromium`/`google-chrome` **oder** eine TeX-Engine
 
-`:checkhealth ribbon` sagt dir, was vorhanden ist.
+`:checkhealth foolscap` sagt dir, was vorhanden ist.
 
 ## Installation
 
@@ -47,7 +49,7 @@ Mit [lazy.nvim](https://github.com/folke/lazy.nvim):
 
 ```lua
 {
-  "DEIN-NAME/ribbon",
+  "DEIN-NAME/foolscap",
   ft = { "markdown", "text", "asciidoc", "rst", "org" },
   opts = {
     languages = { "de-DE", "en-US" },  -- erste = Standard
@@ -60,11 +62,11 @@ Mit [lazy.nvim](https://github.com/folke/lazy.nvim):
 
 ### Als eigenständiges Schreibprogramm (für Nicht-Vimmer)
 
-Ribbon kann als **separate neovim-App** laufen, ganz ohne deine sonstige Konfiguration anzufassen:
+Foolscap kann als **separate neovim-App** laufen, ganz ohne deine sonstige Konfiguration anzufassen:
 
 ```sh
-git clone https://github.com/DEIN-NAME/ribbon ~/.config/ribbon-nvim
-echo "alias schreiben='NVIM_APPNAME=ribbon-nvim nvim'" >> ~/.bashrc
+git clone https://github.com/DEIN-NAME/foolscap ~/.config/foolscap-nvim
+echo "alias schreiben='NVIM_APPNAME=foolscap-nvim nvim'" >> ~/.bashrc
 ```
 
 Dann startest du dein Schreibprogramm einfach mit `schreiben meintext.md`.
@@ -73,27 +75,27 @@ Dann startest du dein Schreibprogramm einfach mit `schreiben meintext.md`.
 ## Schnellstart
 
 ```vim
-:Ribbon            " Schreibraum an/aus (Prosa + Fokus + Schreibmaschine + Thema)
-:RibbonProgress    " Wort-Fortschritt
-:RibbonGoal 1500   " Tagesziel
-:RibbonBuild       " Buch als EPUB/PDF bauen
+:Foolscap            " Schreibraum an/aus (Prosa + Fokus + Schreibmaschine + Thema)
+:FoolscapProgress    " Wort-Fortschritt
+:FoolscapGoal 1500   " Tagesziel
+:FoolscapBuild       " Buch als EPUB/PDF bauen
 ```
 
 Markdown-Dateien öffnen automatisch im Prosa-Modus. Den vollen Schreibraum holst
-du dir mit `:Ribbon` (oder `<leader>rr`, wenn `keymaps = true`).
+du dir mit `:Foolscap` (oder `<leader>rr`, wenn `keymaps = true`).
 
 ## Befehle
 
 | Befehl | Wirkung |
 |---|---|
-| `:Ribbon` | Schreibraum an/aus |
-| `:RibbonProse` | nur Prosa-Modus an/aus |
-| `:RibbonFocus` | nur zentrierten Fokus an/aus |
-| `:RibbonProgress` | Wort-Fortschritt zeigen |
-| `:RibbonGoal {n}` | Tagesziel setzen |
-| `:RibbonGrammar` | Grammatik-Check an/aus |
-| `:RibbonLanguage {lang}` | Grammatiksprache umschalten (z. B. `en-US`) |
-| `:RibbonBuild` | Buch als EPUB/PDF bauen |
+| `:Foolscap` | Schreibraum an/aus |
+| `:FoolscapProse` | nur Prosa-Modus an/aus |
+| `:FoolscapFocus` | nur zentrierten Fokus an/aus |
+| `:FoolscapProgress` | Wort-Fortschritt zeigen |
+| `:FoolscapGoal {n}` | Tagesziel setzen |
+| `:FoolscapGrammar` | Grammatik-Check an/aus |
+| `:FoolscapLanguage {lang}` | Grammatiksprache umschalten (z. B. `en-US`) |
+| `:FoolscapBuild` | Buch als EPUB/PDF bauen |
 
 ## Standard-Tastenkürzel (`keymaps = true`)
 
@@ -106,7 +108,7 @@ Grammatik-Hinweis · `<leader>` + LSP-Code-Action zum Übernehmen einer Korrektu
 ## Konfiguration (Vorgaben)
 
 ```lua
-require("ribbon").setup({
+require("foolscap").setup({
   languages  = { "de-DE", "en-US" },
   spell      = true,
   spelllang  = "de,en",
@@ -123,7 +125,7 @@ require("ribbon").setup({
 
 ## Dank
 
-Ribbon steht auf den Schultern vieler: der [LARBS](https://larbs.xyz)-Tradition
+Foolscap steht auf den Schultern vieler: der [LARBS](https://larbs.xyz)-Tradition
 (Luke Smith), [Goyo](https://github.com/junegunn/goyo.vim),
 [vim-pencil](https://github.com/preservim/vim-pencil) und
 [ltex-ls(-plus)](https://github.com/ltex-plus/ltex-ls-plus). Danke.

@@ -1,9 +1,9 @@
--- :checkhealth ribbon
+-- :checkhealth foolscap
 local M = {}
 
 function M.check()
   local h = vim.health
-  h.start("Ribbon")
+  h.start("Foolscap")
 
   if vim.fn.has("nvim-0.10") == 1 then
     h.ok("neovim " .. tostring(vim.version()))

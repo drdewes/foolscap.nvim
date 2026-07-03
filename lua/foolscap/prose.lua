@@ -5,7 +5,7 @@ local MOVE = { "j", "k", "0", "$" }
 
 function M.enable(buf)
   buf = buf or vim.api.nvim_get_current_buf()
-  local cfg = require("ribbon.config").options
+  local cfg = require("foolscap.config").options
   local win = vim.api.nvim_get_current_win()
   vim.bo[buf].textwidth = 0
   vim.wo[win].wrap = true
@@ -27,7 +27,7 @@ function M.enable(buf)
     vim.keymap.set("i", "--", "–", { buffer = buf })
     vim.keymap.set("i", "...", "…", { buffer = buf })
   end
-  vim.b[buf].ribbon_prose = true
+  vim.b[buf].foolscap_prose = true
 end
 
 function M.disable(buf)
@@ -39,12 +39,12 @@ function M.disable(buf)
   for _, k in ipairs({ "j", "k" }) do pcall(vim.keymap.del, "v", k, { buffer = buf }) end
   pcall(vim.keymap.del, "i", "--", { buffer = buf })
   pcall(vim.keymap.del, "i", "...", { buffer = buf })
-  vim.b[buf].ribbon_prose = false
+  vim.b[buf].foolscap_prose = false
 end
 
 function M.toggle(buf)
   buf = buf or vim.api.nvim_get_current_buf()
-  if vim.b[buf].ribbon_prose then M.disable(buf) else M.enable(buf) end
+  if vim.b[buf].foolscap_prose then M.disable(buf) else M.enable(buf) end
 end
 
 return M

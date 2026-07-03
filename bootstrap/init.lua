@@ -1,11 +1,11 @@
--- Ribbon – Starter-Konfiguration für die eigenständige Schreib-App.
+-- Foolscap – Starter-Konfiguration für die eigenständige Schreib-App.
 --
 -- Benutzung (ohne deine sonstige neovim-Config anzufassen):
---   git clone <repo> ~/.config/ribbon-nvim
---   alias schreiben='NVIM_APPNAME=ribbon-nvim nvim'
+--   git clone <repo> ~/.config/foolscap-nvim
+--   alias schreiben='NVIM_APPNAME=foolscap-nvim nvim'
 --   schreiben meintext.md
 --
--- Holt Ribbon (und nur Ribbon) über lazy.nvim und richtet sinnvolle
+-- Holt Foolscap (und nur Foolscap) über lazy.nvim und richtet sinnvolle
 -- Schreib-Vorgaben ein.
 
 vim.g.mapleader = ","
@@ -27,7 +27,7 @@ require("lazy").setup({
     -- Im Repo selbst: hier auf den lokalen Pfad zeigen lassen oder den
     -- GitHub-Namen eintragen, sobald veröffentlicht:
     dir = vim.fn.stdpath("config"),
-    name = "ribbon",
+    name = "foolscap",
     opts = {
       languages = { "de-DE", "en-US" },
       theme = "amber",
@@ -35,7 +35,7 @@ require("lazy").setup({
       keymaps = true,
     },
     config = function(_, opts)
-      require("ribbon").setup(opts)
+      require("foolscap").setup(opts)
     end,
   },
 })
@@ -47,7 +47,7 @@ vim.api.nvim_create_autocmd("User", {
     vim.api.nvim_create_autocmd("FileType", {
       pattern = { "markdown", "text", "asciidoc", "rst", "org" },
       once = true,
-      callback = function() vim.schedule(function() require("ribbon").room() end) end,
+      callback = function() vim.schedule(function() require("foolscap").room() end) end,
     })
   end,
 })
