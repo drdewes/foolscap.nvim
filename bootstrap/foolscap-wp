@@ -1,0 +1,34 @@
+#!/bin/sh
+# foolscap-wp – WordPerfect-5.1-Schreibfenster.
+# Öffnet ein eigenes kitty-Fenster mit DOS-VGA-Font (CP437), kleinerer Schrift
+# und blauem WP-Screen und startet darin neovim im Foolscap-Schreibraum.
+#
+# Standard-Font: Liberation Mono (= Courier New, klassischer WordPerfect-Font).
+# Größe über Umgebungsvariable anpassbar, z.B.:  FOOLSCAP_FONT_SIZE=16 foolscap-wp datei.md
+
+FONT="${FOOLSCAP_FONT:-Liberation Mono}"
+SIZE="${FOOLSCAP_FONT_SIZE:-18}"
+
+# Plugin-Wurzel relativ zu diesem Script (Symlink-sicher) – damit foolscap
+# sicher im runtimepath liegt, egal wie deine sonstige Config es (nicht) lädt:
+SELF=$(readlink -f "$0")
+ROOT=$(dirname "$(dirname "$SELF")")
+
+# stderr nach /dev/null: unterdrückt die harmlose kitty-Warnung
+# "Could not move child process into a systemd scope" (i3 ohne systemd-Session).
+exec kitty 2>/dev/null \
+  --override "font_family=$FONT" \
+  --override "font_size=$SIZE" \
+  --override "remember_window_size=no" \
+  --override "initial_window_width=80c" \
+  --override "initial_window_height=25c" \
+  --override "background=#0000aa" \
+  --override "foreground=#ffffff" \
+  --override "cursor=#ffff55" \
+  --override "cursor_text_color=#0000aa" \
+  --title "Foolscap – WordPerfect 5.1" \
+  -e nvim \
+    --cmd "set runtimepath^=$ROOT" \
+    -c "lua require('foolscap.config').setup({ theme = 'wp51', width = 78 })" \
+    -c "lua vim.defer_fn(function() require('foolscap').room() end, 60)" \
+    "$@"

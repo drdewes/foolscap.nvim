@@ -11,7 +11,7 @@ function M.room()
   local cfg = config.options
   require("foolscap.prose").enable()
   require("foolscap.focus").open(cfg.width)
-  if cfg.typewriter then vim.wo.scrolloff = 999 end -- Schreibmaschinen-Scrollen
+  if cfg.typewriter then require("foolscap.typewriter").enable() end -- Schreibmaschinen-Scrollen
   if cfg.theme ~= "none" then require("foolscap.theme").apply(cfg.theme) end
   vim.b.foolscap_room = true
   vim.api.nvim_echo({ { "Foolscap: Schreibraum an" } }, false, {})
@@ -19,7 +19,7 @@ end
 
 function M.room_off()
   require("foolscap.focus").close()
-  vim.wo.scrolloff = 0
+  require("foolscap.typewriter").disable()
   require("foolscap.theme").restore()
   vim.b.foolscap_room = false
   vim.api.nvim_echo({ { "Foolscap: Schreibraum aus" } }, false, {})

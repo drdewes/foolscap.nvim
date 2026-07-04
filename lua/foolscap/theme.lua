@@ -5,6 +5,10 @@ local palettes = {
   amber = { bg = "#000000", fg = "#ffb000", dim = "#7a5400", accent = "#ffd070", dark = true },
   green = { bg = "#001400", fg = "#33ff66", dim = "#1f7a3f", accent = "#aaffaa", dark = true },
   paper = { bg = "#f4ecd8", fg = "#33312b", dim = "#9a9484", accent = "#8a5a2a", dark = false },
+  -- WordPerfect 5.1: blauer DOS-Textmodus-Screen, weißer Text.
+  wp51 = { bg = "#0000aa", fg = "#ffffff", dim = "#9a9ad6", accent = "#ffff55", dark = true },
+  -- MS Word 5.5 (DOS-Textmodus): schwarzer Screen, helles DOS-Grau.
+  word55 = { bg = "#000000", fg = "#aaaaaa", dim = "#555555", accent = "#ffffff", dark = true },
 }
 
 local saved = nil
