@@ -29,6 +29,6 @@ exec kitty 2>/dev/null \
   --title "Foolscap – WordPerfect 5.1" \
   -e nvim \
     --cmd "set runtimepath^=$ROOT" \
-    -c "lua require('foolscap.config').setup({ theme = 'wp51', width = 78 })" \
+    -c "lua require('foolscap.config').setup({ theme = 'wp51', width = 65 })" \
     -c "lua vim.defer_fn(function() require('foolscap').room() end, 60)" \
     "$@"
