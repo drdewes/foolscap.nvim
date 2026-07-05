@@ -75,6 +75,35 @@ local function mark_delimited(buf, row, line, marker, inner_group, marker_group)
   end
 end
 
+-- Einzelnes *kursiv* markieren – aber **fett** NICHT anfassen. Deshalb ein
+-- eigener Scanner statt mark_delimited: Doppelsterne (**) werden übersprungen,
+-- nur einzeln stehende Sterne bilden ein Kursiv-Paar. (` * ` als Rechenzeichen
+-- ohne Partner bleibt unmarkiert.)
+local function mark_italic(buf, row, line)
+  local n = #line
+  local i = 1
+  local open = nil
+  while i <= n do
+    if line:sub(i, i) == "*" then
+      if line:sub(i + 1, i + 1) == "*" then
+        i = i + 2 -- ** überspringen (Fett)
+      else
+        if open then
+          add_range(buf, row, open - 1, open, "FoolscapMarkdownBoldMarker") -- öffnendes *
+          add_range(buf, row, open, i - 1, "FoolscapMarkdownItalic")        -- Inhalt
+          add_range(buf, row, i - 1, i, "FoolscapMarkdownBoldMarker")       -- schließendes *
+          open = nil
+        else
+          open = i
+        end
+        i = i + 1
+      end
+    else
+      i = i + 1
+    end
+  end
+end
+
 local function refresh(buf)
   if not vim.api.nvim_buf_is_valid(buf) then return end
   vim.api.nvim_buf_clear_namespace(buf, ns, 0, -1)
@@ -95,6 +124,7 @@ local function refresh(buf)
     end
 
     mark_delimited(buf, i, line, "**", "FoolscapMarkdownBold", "FoolscapMarkdownBoldMarker")
+    mark_italic(buf, i, line)
     mark_delimited(buf, i, line, "`", "FoolscapMarkdownCode", "FoolscapMarkdownCode")
   end
 end

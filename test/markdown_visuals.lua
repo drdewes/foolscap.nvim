@@ -56,6 +56,7 @@ check("Extmarks vorhanden (>=6)", #marks >= 6)
 check("H1-Extmark", seen["FoolscapMarkdownH1"] == true)
 check("H2-Extmark", seen["FoolscapMarkdownH2"] == true)
 check("Fett-Extmark", seen["FoolscapMarkdownBold"] == true)
+check("Kursiv-Extmark", seen["FoolscapMarkdownItalic"] == true)
 check("Code-Extmark", seen["FoolscapMarkdownCode"] == true)
 check("Zitat-Extmark", seen["FoolscapMarkdownQuote"] == true)
 
