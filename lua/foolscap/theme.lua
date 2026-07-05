@@ -1,14 +1,15 @@
 -- Monochrome Schreib-Themen (Bernstein/Grün/Papier) – wie alte Terminals & Schreibmaschinen.
 local M = {}
 
+-- 'em' = Betonungsfarbe für *kursiv* (deutlich sichtbar, aber themen-stimmig).
 local palettes = {
-  amber = { bg = "#000000", fg = "#ffb000", dim = "#7a5400", accent = "#ffd070", dark = true },
-  green = { bg = "#001400", fg = "#33ff66", dim = "#1f7a3f", accent = "#aaffaa", dark = true },
-  paper = { bg = "#f4ecd8", fg = "#33312b", dim = "#9a9484", accent = "#8a5a2a", dark = false },
+  amber = { bg = "#000000", fg = "#ffb000", dim = "#7a5400", accent = "#ffd070", em = "#ff7000", dark = true },
+  green = { bg = "#001400", fg = "#33ff66", dim = "#1f7a3f", accent = "#aaffaa", em = "#00d0ff", dark = true },
+  paper = { bg = "#f4ecd8", fg = "#33312b", dim = "#9a9484", accent = "#8a5a2a", em = "#1f5fa8", dark = false },
   -- WordPerfect 5.1: blauer DOS-Textmodus-Screen, weißer Text.
-  wp51 = { bg = "#0000aa", fg = "#ffffff", dim = "#9a9ad6", accent = "#ffff55", dark = true },
+  wp51 = { bg = "#0000aa", fg = "#ffffff", dim = "#9a9ad6", accent = "#ffff55", em = "#66b3ff", dark = true },
   -- MS Word 5.5 (DOS-Textmodus): schwarzer Screen, helles DOS-Grau.
-  word55 = { bg = "#000000", fg = "#aaaaaa", dim = "#555555", accent = "#ffffff", dark = true },
+  word55 = { bg = "#000000", fg = "#aaaaaa", dim = "#555555", accent = "#ffffff", em = "#7ab8ff", dark = true },
 }
 
 local saved = nil
@@ -65,7 +66,7 @@ function M.apply(name)
   --   ## H2 -> Akzentfarbe, fett, einfach unterstrichen
   --   ### H3-> Akzentfarbe, fett
   --   **fett** -> normale Schriftfarbe, nur fett (Schriftschnitt)
-  --   *kursiv* -> kursiv + unterstrichen (wie WP Betonung zeigte)
+  --   *kursiv* -> kursiv in eigener Betonungsfarbe (hier: helles Blau)
   --   `code`   -> invers (Vorder-/Hintergrund getauscht)
   --   > Zitat  -> gedimmt, kursiv
   hl(0, "FoolscapMarkdownH1", { fg = p.accent, bg = p.bg, bold = true, underdouble = true })
@@ -73,7 +74,7 @@ function M.apply(name)
   hl(0, "FoolscapMarkdownH3", { fg = p.accent, bg = p.bg, bold = true })
   hl(0, "FoolscapMarkdownBold", { fg = p.fg, bg = p.bg, bold = true })
   hl(0, "FoolscapMarkdownBoldMarker", { fg = p.dim, bg = p.bg })
-  hl(0, "FoolscapMarkdownItalic", { fg = p.fg, bg = p.bg, italic = true, underline = true })
+  hl(0, "FoolscapMarkdownItalic", { fg = p.em, bg = p.bg, italic = true })
   hl(0, "FoolscapMarkdownQuote", { fg = p.dim, bg = p.bg, italic = true })
   hl(0, "FoolscapMarkdownCode", { fg = p.bg, bg = p.fg })
   M.active = name
