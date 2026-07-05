@@ -162,15 +162,15 @@ The same Markdown, five moods — set with `theme = "…"`:
 
 <table>
   <tr>
-    <td align="center"><b>wp51</b> — WordPerfect 5.1<br><img src="images/theme-wp51.png" width="330"></td>
-    <td align="center"><b>amber</b> — amber CRT<br><img src="images/theme-amber.png" width="330"></td>
+    <td align="center"><b>wp51</b> — WordPerfect 5.1<br><img src="images/theme-wp51.png" width="460"></td>
+    <td align="center"><b>amber</b> — amber CRT<br><img src="images/theme-amber.png" width="460"></td>
   </tr>
   <tr>
-    <td align="center"><b>green</b> — green phosphor<br><img src="images/theme-green.png" width="330"></td>
-    <td align="center"><b>paper</b> — light / paper<br><img src="images/theme-paper.png" width="330"></td>
+    <td align="center"><b>green</b> — green phosphor<br><img src="images/theme-green.png" width="460"></td>
+    <td align="center"><b>paper</b> — light / paper<br><img src="images/theme-paper.png" width="460"></td>
   </tr>
   <tr>
-    <td align="center"><b>word55</b> — MS-DOS Word 5.5<br><img src="images/theme-word55.png" width="330"></td>
+    <td align="center"><b>word55</b> — MS-DOS Word 5.5<br><img src="images/theme-word55.png" width="460"></td>
     <td></td>
   </tr>
 </table>
@@ -352,15 +352,15 @@ Dasselbe Markdown, fünf Stimmungen — per `theme = "…"`:
 
 <table>
   <tr>
-    <td align="center"><b>wp51</b> — WordPerfect 5.1<br><img src="images/theme-wp51.png" width="330"></td>
-    <td align="center"><b>amber</b> — Bernstein-CRT<br><img src="images/theme-amber.png" width="330"></td>
+    <td align="center"><b>wp51</b> — WordPerfect 5.1<br><img src="images/theme-wp51.png" width="460"></td>
+    <td align="center"><b>amber</b> — Bernstein-CRT<br><img src="images/theme-amber.png" width="460"></td>
   </tr>
   <tr>
-    <td align="center"><b>green</b> — Grün-Phosphor<br><img src="images/theme-green.png" width="330"></td>
-    <td align="center"><b>paper</b> — hell / Papier<br><img src="images/theme-paper.png" width="330"></td>
+    <td align="center"><b>green</b> — Grün-Phosphor<br><img src="images/theme-green.png" width="460"></td>
+    <td align="center"><b>paper</b> — hell / Papier<br><img src="images/theme-paper.png" width="460"></td>
   </tr>
   <tr>
-    <td align="center"><b>word55</b> — MS-DOS Word 5.5<br><img src="images/theme-word55.png" width="330"></td>
+    <td align="center"><b>word55</b> — MS-DOS Word 5.5<br><img src="images/theme-word55.png" width="460"></td>
     <td></td>
   </tr>
 </table>
