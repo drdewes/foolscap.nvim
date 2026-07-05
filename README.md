@@ -38,7 +38,7 @@ You write in **Markdown** — simple, future-proof, readable everywhere.
 | | |
 |---|---|
 | ✍️ **Prose mode** | soft wrap, motion by visible lines, spell-check, gentle typography (`--`→–, `...`→…) |
-| 📝 **Markdown clarity** | headings, `**bold**`, `*italic*`, quotes and inline code are visually emphasized without changing the text |
+| 📝 **Markdown clarity** | headings, `**bold**`, `*italic*`, quotes and inline code each get their own WordPerfect-style look — the source (`#`, `**`) stays visible, nothing is concealed or reflowed |
 | 🎞️ **Typewriter look** | monochrome amber/green/paper theme + typewriter scrolling |
 | 🎯 **Focus** | centered text column (default 65 chars), dependency-free, any terminal |
 | 📖 **Grammar & style** | multilingual via `ltex-ls` (English, German, …); spelling is left to the editor |
@@ -127,7 +127,7 @@ require("foolscap").setup({
   spelllang  = "en,de",
   width      = 65,
   typewriter = true,
-  theme      = "amber",        -- amber | green | paper | none
+  theme      = "amber",        -- amber | green | paper | wp51 | word55 | none
   goal       = 1000,
   markdown_visuals = true,
   typography = true,
@@ -136,6 +136,25 @@ require("foolscap").setup({
   build      = { formats = { "epub", "pdf" } },
 })
 ```
+
+## Markdown highlighting
+
+While you write Markdown, Foolscap gives the structure a clear,
+WordPerfect-style look — **without touching the text**: `#` and `**` stay
+visible, nothing is concealed or reflowed.
+
+| element | look |
+|---|---|
+| `# Heading 1` | accent colour, bold, double-underlined, **centered** in the column |
+| `## Heading 2` | accent colour, bold, underlined |
+| `### Heading 3` | accent colour, bold |
+| `**bold**` | bold weight |
+| `*italic*` | its own emphasis colour, italic |
+| `> quote` | dimmed, italic |
+| `` `code` `` | inverse (colours swapped) |
+
+Colours follow the active theme (e.g. yellow-on-blue in the `wp51`
+WordPerfect look). Turn it off with `markdown_visuals = false`.
 
 ## Thanks
 
@@ -191,7 +210,7 @@ Du schreibst in **Markdown** – schlicht, zukunftssicher, überall lesbar.
 | | |
 |---|---|
 | ✍️ **Prosa-Modus** | weicher Umbruch, Bewegung nach sichtbaren Zeilen, Rechtschreibung, sanfte Typografie (`--`→–, `...`→…) |
-| 📝 **Markdown-Klarheit** | Überschriften, `**fett**`, `*kursiv*`, Zitate und Inline-Code werden sichtbar hervorgehoben, ohne den Text zu verändern |
+| 📝 **Markdown-Klarheit** | Überschriften, `**fett**`, `*kursiv*`, Zitate und Inline-Code bekommen je einen eigenen WordPerfect-Look – der Quelltext (`#`, `**`) bleibt sichtbar, nichts wird versteckt oder umgebrochen |
 | 🎞️ **Schreibmaschinen-Look** | monochromes Bernstein-/Grün-/Papier-Thema + Schreibmaschinen-Scrollen |
 | 🎯 **Fokus** | zentrierte Textspalte (Standard 65 Zeichen), dependency-frei, jedes Terminal |
 | 📖 **Grammatik & Stil** | mehrsprachig über `ltex-ls` (Deutsch, Englisch, …); Rechtschreibung macht der Editor |
@@ -279,14 +298,34 @@ require("foolscap").setup({
   spelllang  = "de,en",
   width      = 65,
   typewriter = true,
-  theme      = "amber",        -- amber | green | paper | none
+  theme      = "amber",        -- amber | green | paper | wp51 | word55 | none
   goal       = 1000,
+  markdown_visuals = true,
   typography = true,
   grammar    = true,
   keymaps    = false,
   build      = { formats = { "epub", "pdf" } },
 })
 ```
+
+### Markdown-Hervorhebung
+
+Während du Markdown schreibst, gibt Foolscap der Struktur einen klaren
+WordPerfect-Look – **ohne den Text anzufassen**: `#` und `**` bleiben
+sichtbar, nichts wird versteckt oder umgebrochen.
+
+| Element | Look |
+|---|---|
+| `# Überschrift 1` | Akzentfarbe, fett, doppelt unterstrichen, **zentriert** in der Spalte |
+| `## Überschrift 2` | Akzentfarbe, fett, unterstrichen |
+| `### Überschrift 3` | Akzentfarbe, fett |
+| `**fett**` | fette Schrift |
+| `*kursiv*` | eigene Betonungsfarbe, kursiv |
+| `> Zitat` | gedimmt, kursiv |
+| `` `code` `` | invers (Farben getauscht) |
+
+Die Farben folgen dem aktiven Thema (z. B. Gelb-auf-Blau im `wp51`-
+WordPerfect-Look). Abschalten mit `markdown_visuals = false`.
 
 ### Dank
 

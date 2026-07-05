@@ -14,7 +14,7 @@ SETUP                                                        *foolscap-setup*
 >lua
     require("foolscap").setup({
       languages  = { "de-DE", "en-US" },
-      theme      = "amber",   -- amber | green | paper | none
+      theme      = "amber",   -- amber | green | paper | wp51 | word55 | none
       width      = 65,
       goal       = 1000,
       markdown_visuals = true,
@@ -33,6 +33,25 @@ BEFEHLE                                                   *foolscap-commands*
 :FoolscapGrammar     Grammatik-Check an/aus
 :FoolscapLanguage {lang}  Grammatiksprache umschalten (z. B. en-US)
 :FoolscapBuild       Buch als EPUB/PDF bauen
+
+==============================================================================
+MARKDOWN                                                  *foolscap-markdown*
+
+Mit `markdown_visuals = true` (Vorgabe) bekommt die Markdown-Struktur einen
+klaren WordPerfect-Look – OHNE den Text zu verändern: `#` und `**` bleiben
+sichtbar, nichts wird versteckt oder umgebrochen.
+
+    # Überschrift 1   Akzentfarbe, fett, doppelt unterstrichen, zentriert
+    ## Überschrift 2  Akzentfarbe, fett, unterstrichen
+    ### Überschrift 3 Akzentfarbe, fett
+    **fett**          fette Schrift
+    *kursiv*          eigene Betonungsfarbe, kursiv
+    > Zitat           gedimmt, kursiv
+    `code`            invers (Farben getauscht)
+
+Die Farben folgen dem aktiven Thema (z. B. Gelb-auf-Blau im wp51-Look).
+Erkennung über Dateityp (markdown/vimwiki/markdown.pandoc) oder .md-Endung.
+Abschalten mit `markdown_visuals = false`.
 
 ==============================================================================
 GESUNDHEIT                                                  *foolscap-health*
