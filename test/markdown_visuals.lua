@@ -49,7 +49,7 @@ local ns = vim.api.nvim_create_namespace("foolscap_markdown")
 local marks = vim.api.nvim_buf_get_extmarks(buf, ns, 0, -1, { details = true })
 local seen = {}
 for _, m in ipairs(marks) do
-  seen[m[4].hl_group] = true
+  if m[4].hl_group then seen[m[4].hl_group] = true end
 end
 
 check("Extmarks vorhanden (>=6)", #marks >= 6)
@@ -58,6 +58,14 @@ check("H2-Extmark", seen["FoolscapMarkdownH2"] == true)
 check("Fett-Extmark", seen["FoolscapMarkdownBold"] == true)
 check("Code-Extmark", seen["FoolscapMarkdownCode"] == true)
 check("Zitat-Extmark", seen["FoolscapMarkdownQuote"] == true)
+
+-- H1 wird zentriert: ein inline-Virtualtext-Polster auf der ersten Zeile.
+local h1_marks = vim.api.nvim_buf_get_extmarks(buf, ns, { 0, 0 }, { 0, -1 }, { details = true })
+local has_pad = false
+for _, m in ipairs(h1_marks) do
+  if m[4].virt_text and m[4].virt_text_pos == "inline" then has_pad = true end
+end
+check("H1 zentriert (virt_text-Polster)", has_pad)
 
 -- Sichtbarkeit: jede Pop-Gruppe muss Farbe ODER reverse tragen (nicht leer):
 local function visible(name)

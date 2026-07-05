@@ -45,6 +45,22 @@ local function add_range(buf, row, from, to, group)
   end
 end
 
+-- Eine Zeile optisch zentrieren, OHNE den Text zu ändern: ein inline-
+-- Virtualtext (nur Leerzeichen) als linkes Polster schiebt die sichtbare Zeile
+-- in die Mitte der Schreibspalte. Wie eine zentrierte Überschrift in
+-- WordPerfect – die reale Zeile (inkl. "# ") bleibt unverändert.
+local function center_line(buf, row, line)
+  local width = require("foolscap.config").options.width or 65
+  local pad = math.floor((width - vim.fn.strdisplaywidth(line)) / 2)
+  if pad < 1 then return end
+  vim.api.nvim_buf_set_extmark(buf, ns, row, 0, {
+    virt_text = { { string.rep(" ", pad) } },
+    virt_text_pos = "inline",
+    right_gravity = false,
+    priority = 190,
+  })
+end
+
 local function mark_delimited(buf, row, line, marker, inner_group, marker_group)
   local start = 1
   while true do
@@ -69,6 +85,7 @@ local function refresh(buf)
     local i = row - 1
     if line:match("^#%s") then
       add_range(buf, i, 0, #line, "FoolscapMarkdownH1")
+      center_line(buf, i, line) -- H1 wie in WordPerfect zentrieren
     elseif line:match("^##%s") then
       add_range(buf, i, 0, #line, "FoolscapMarkdownH2")
     elseif line:match("^###%s") then
