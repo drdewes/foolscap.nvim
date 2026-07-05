@@ -38,6 +38,7 @@ You write in **Markdown** — simple, future-proof, readable everywhere.
 | | |
 |---|---|
 | ✍️ **Prose mode** | soft wrap, motion by visible lines, spell-check, gentle typography (`--`→–, `...`→…) |
+| 📝 **Markdown clarity** | headings, `**bold**`, `*italic*`, quotes and inline code are visually emphasized without changing the text |
 | 🎞️ **Typewriter look** | monochrome amber/green/paper theme + typewriter scrolling |
 | 🎯 **Focus** | centered text column (default 65 chars), dependency-free, any terminal |
 | 📖 **Grammar & style** | multilingual via `ltex-ls` (English, German, …); spelling is left to the editor |
@@ -128,6 +129,7 @@ require("foolscap").setup({
   typewriter = true,
   theme      = "amber",        -- amber | green | paper | none
   goal       = 1000,
+  markdown_visuals = true,
   typography = true,
   grammar    = true,
   keymaps    = false,
@@ -189,6 +191,7 @@ Du schreibst in **Markdown** – schlicht, zukunftssicher, überall lesbar.
 | | |
 |---|---|
 | ✍️ **Prosa-Modus** | weicher Umbruch, Bewegung nach sichtbaren Zeilen, Rechtschreibung, sanfte Typografie (`--`→–, `...`→…) |
+| 📝 **Markdown-Klarheit** | Überschriften, `**fett**`, `*kursiv*`, Zitate und Inline-Code werden sichtbar hervorgehoben, ohne den Text zu verändern |
 | 🎞️ **Schreibmaschinen-Look** | monochromes Bernstein-/Grün-/Papier-Thema + Schreibmaschinen-Scrollen |
 | 🎯 **Fokus** | zentrierte Textspalte (Standard 65 Zeichen), dependency-frei, jedes Terminal |
 | 📖 **Grammatik & Stil** | mehrsprachig über `ltex-ls` (Deutsch, Englisch, …); Rechtschreibung macht der Editor |

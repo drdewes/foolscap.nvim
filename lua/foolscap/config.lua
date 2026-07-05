@@ -20,6 +20,8 @@ M.defaults = {
     "markdown", "markdown.pandoc", "vimwiki", "text", "tex", "asciidoc", "rst", "org",
   },
   auto = true, -- Prosa-Modus automatisch bei obigen Dateitypen
+  -- Markdown sichtbar strukturieren (Überschriften, **fett**, *kursiv*, Zitate):
+  markdown_visuals = true,
   -- Deutsche Typografie im Einfügemodus (-- -> –, ... -> …):
   typography = true,
   -- Grammatik aktivieren (ltex-ls / ltex-ls-plus muss installiert sein):

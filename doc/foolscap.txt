@@ -5,7 +5,8 @@
 
 Foolscap macht neovim zu einem ruhigen Schreibprogramm: Prosa-Modus, zentrierte
 Spalte, monochromer Schreibmaschinen-Look mit Schreibmaschinen-Scrollen,
-mehrsprachige Grammatikprüfung, Wortziele und Buch-Export nach EPUB/PDF.
+Markdown-Hervorhebung für Überschriften und Betonungen, mehrsprachige
+Grammatikprüfung, Wortziele und Buch-Export nach EPUB/PDF.
 
 ==============================================================================
 SETUP                                                        *foolscap-setup*
@@ -16,6 +17,7 @@ SETUP                                                        *foolscap-setup*
       theme      = "amber",   -- amber | green | paper | none
       width      = 65,
       goal       = 1000,
+      markdown_visuals = true,
       keymaps    = false,
     })
 <

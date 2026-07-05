@@ -30,5 +30,6 @@ exec kitty 2>/dev/null \
   -e nvim \
     --cmd "set runtimepath^=$ROOT" \
     -c "lua require('foolscap.config').setup({ theme = 'wp51', width = 65 })" \
+    -c "lua if vim.api.nvim_buf_get_name(0) == '' and vim.bo.filetype == '' then vim.bo.filetype = 'markdown' end" \
     -c "lua vim.defer_fn(function() require('foolscap').room() end, 60)" \
     "$@"

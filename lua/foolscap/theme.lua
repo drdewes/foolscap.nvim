@@ -17,7 +17,12 @@ function M.apply(name)
   local p = palettes[name]
   if not p then return end
   if not saved then
-    saved = { bg = vim.o.background, tgc = vim.o.termguicolors, syntax = vim.g.syntax_on }
+    saved = {
+      bg = vim.o.background,
+      tgc = vim.o.termguicolors,
+      syntax = vim.g.syntax_on,
+      colors_name = vim.g.colors_name,
+    }
   end
   vim.o.termguicolors = true
   vim.o.background = p.dark and "dark" or "light"
@@ -52,6 +57,16 @@ function M.apply(name)
   hl(0, "SpellCap", { sp = p.accent, undercurl = true })
   hl(0, "SpellRare", { sp = p.accent, undercurl = true })
   hl(0, "SpellLocal", { sp = p.accent, undercurl = true })
+  -- Markdown-Struktur im Schreibmodus: echtes Markdown bleibt sichtbar,
+  -- aber wichtige Stellen heben sich monochrom deutlicher ab.
+  hl(0, "FoolscapMarkdownH1", { fg = p.bg, bg = p.accent, bold = true })
+  hl(0, "FoolscapMarkdownH2", { fg = p.accent, bg = p.bg, bold = true, underline = true })
+  hl(0, "FoolscapMarkdownH3", { fg = p.accent, bg = p.bg, bold = true })
+  hl(0, "FoolscapMarkdownBold", { fg = p.bg, bg = p.accent, bold = true })
+  hl(0, "FoolscapMarkdownBoldMarker", { fg = p.dim, bg = p.bg })
+  hl(0, "FoolscapMarkdownItalic", { fg = p.fg, bg = p.bg, italic = true })
+  hl(0, "FoolscapMarkdownQuote", { fg = p.dim, bg = p.bg, italic = true })
+  hl(0, "FoolscapMarkdownCode", { fg = p.accent, bg = p.dim })
   M.active = name
 end
 
@@ -59,7 +74,11 @@ function M.restore()
   if not saved then return end
   vim.o.background = saved.bg
   vim.o.termguicolors = saved.tgc
-  if saved.syntax then vim.cmd("syntax on") end
+  if saved.colors_name and saved.colors_name ~= "" then
+    pcall(vim.cmd.colorscheme, saved.colors_name)
+  elseif saved.syntax then
+    vim.cmd("syntax on")
+  end
   saved = nil
   M.active = nil
 end

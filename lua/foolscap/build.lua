@@ -3,6 +3,21 @@
 local M = {}
 
 local function has(bin) return vim.fn.executable(bin) == 1 end
+local function short(msg)
+  msg = vim.trim(msg or "")
+  if msg == "" then return "" end
+  local lines = vim.split(msg, "\n", { plain = true, trimempty = true })
+  local kept = {}
+  for i = 1, math.min(#lines, 6) do
+    kept[i] = lines[i]
+  end
+  return table.concat(kept, "\n")
+end
+
+local function run(args)
+  local output = vim.fn.system(args)
+  return vim.v.shell_error == 0, output
+end
 
 local function chrome()
   for _, c in ipairs({ "google-chrome-stable", "chromium", "chromium-browser", "google-chrome" }) do
@@ -28,31 +43,43 @@ function M.run()
   vim.fn.mkdir(dir, "p")
   local base = vim.fn.fnamemodify(src, ":t:r")
   local made = {}
+  local errors = {}
 
   for _, fmt in ipairs(cfg.formats) do
     if fmt == "epub" then
       local out = dir .. "/" .. base .. ".epub"
-      vim.fn.system({ "pandoc", src, "-o", out, "--toc", "--split-level=1" })
-      if vim.v.shell_error == 0 then table.insert(made, out) end
+      local ok, output = run({ "pandoc", src, "-o", out, "--toc", "--split-level=1" })
+      if ok then
+        table.insert(made, out)
+      else
+        table.insert(errors, "EPUB: " .. short(output))
+      end
     elseif fmt == "pdf" then
       local out = dir .. "/" .. base .. ".pdf"
       local ch = chrome()
       if ch then
         local html = dir .. "/" .. base .. ".html"
-        vim.fn.system({ "pandoc", src, "-o", html, "--standalone", "--embed-resources" })
-        vim.fn.system({ ch, "--headless", "--no-sandbox", "--disable-gpu",
-          "--no-pdf-header-footer", "--print-to-pdf=" .. out, "file://" .. html })
+        local ok, output = run({ "pandoc", src, "-o", html, "--standalone", "--embed-resources" })
+        if ok then
+          ok, output = run({ ch, "--headless", "--no-sandbox", "--disable-gpu",
+            "--no-pdf-header-footer", "--print-to-pdf=" .. out, "file://" .. html })
+        end
+        if not ok then table.insert(errors, "PDF: " .. short(output)) end
       else
-        vim.fn.system({ "pandoc", src, "-o", out }) -- benötigt eine TeX-Engine
+        local ok, output = run({ "pandoc", src, "-o", out }) -- benötigt eine TeX-Engine
+        if not ok then table.insert(errors, "PDF: " .. short(output)) end
       end
       if vim.fn.filereadable(out) == 1 then table.insert(made, out) end
     end
   end
 
   if #made > 0 then
-    vim.notify("Foolscap: gebaut → " .. table.concat(made, "  "))
+    local details = #errors > 0 and ("\nNicht gebaut:\n" .. table.concat(errors, "\n")) or ""
+    local level = #errors > 0 and vim.log.levels.WARN or vim.log.levels.INFO
+    vim.notify("Foolscap: gebaut → " .. table.concat(made, "  ") .. details, level)
   else
-    vim.notify("Foolscap: Export fehlgeschlagen (siehe :messages).", vim.log.levels.ERROR)
+    local details = #errors > 0 and ("\n" .. table.concat(errors, "\n")) or ""
+    vim.notify("Foolscap: Export fehlgeschlagen." .. details, vim.log.levels.ERROR)
   end
 end
 
