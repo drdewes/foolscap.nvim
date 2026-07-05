@@ -57,16 +57,25 @@ function M.apply(name)
   hl(0, "SpellCap", { sp = p.accent, undercurl = true })
   hl(0, "SpellRare", { sp = p.accent, undercurl = true })
   hl(0, "SpellLocal", { sp = p.accent, undercurl = true })
-  -- Markdown-Struktur im Schreibmodus: echtes Markdown bleibt sichtbar,
-  -- aber wichtige Stellen heben sich monochrom deutlicher ab.
-  hl(0, "FoolscapMarkdownH1", { fg = p.bg, bg = p.accent, bold = true })
+  -- Markdown-Struktur im Schreibmodus: echtes Markdown bleibt sichtbar.
+  -- WordPerfect-/DOS-Look: vor allem Textattribute (fett, unterstrichen,
+  -- invers), sparsam Farbe – jedes Element trägt eine eigene Signatur, damit
+  -- sich Überschriften und Betonungen klar unterscheiden.
+  --   # H1  -> Akzentfarbe, fett, DOPPELT unterstrichen
+  --   ## H2 -> Akzentfarbe, fett, einfach unterstrichen
+  --   ### H3-> Akzentfarbe, fett
+  --   **fett** -> normale Schriftfarbe, nur fett (Schriftschnitt)
+  --   *kursiv* -> kursiv + unterstrichen (wie WP Betonung zeigte)
+  --   `code`   -> invers (Vorder-/Hintergrund getauscht)
+  --   > Zitat  -> gedimmt, kursiv
+  hl(0, "FoolscapMarkdownH1", { fg = p.accent, bg = p.bg, bold = true, underdouble = true })
   hl(0, "FoolscapMarkdownH2", { fg = p.accent, bg = p.bg, bold = true, underline = true })
   hl(0, "FoolscapMarkdownH3", { fg = p.accent, bg = p.bg, bold = true })
-  hl(0, "FoolscapMarkdownBold", { fg = p.bg, bg = p.accent, bold = true })
+  hl(0, "FoolscapMarkdownBold", { fg = p.fg, bg = p.bg, bold = true })
   hl(0, "FoolscapMarkdownBoldMarker", { fg = p.dim, bg = p.bg })
-  hl(0, "FoolscapMarkdownItalic", { fg = p.fg, bg = p.bg, italic = true })
+  hl(0, "FoolscapMarkdownItalic", { fg = p.fg, bg = p.bg, italic = true, underline = true })
   hl(0, "FoolscapMarkdownQuote", { fg = p.dim, bg = p.bg, italic = true })
-  hl(0, "FoolscapMarkdownCode", { fg = p.accent, bg = p.dim })
+  hl(0, "FoolscapMarkdownCode", { fg = p.bg, bg = p.fg })
   M.active = name
 end
 
