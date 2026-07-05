@@ -156,6 +156,25 @@ visible, nothing is concealed or reflowed.
 Colours follow the active theme (e.g. yellow-on-blue in the `wp51`
 WordPerfect look). Turn it off with `markdown_visuals = false`.
 
+## Themes
+
+The same Markdown, five moods — set with `theme = "…"`:
+
+<table>
+  <tr>
+    <td align="center"><b>wp51</b> — WordPerfect 5.1<br><img src="images/theme-wp51.png" width="330"></td>
+    <td align="center"><b>amber</b> — amber CRT<br><img src="images/theme-amber.png" width="330"></td>
+  </tr>
+  <tr>
+    <td align="center"><b>green</b> — green phosphor<br><img src="images/theme-green.png" width="330"></td>
+    <td align="center"><b>paper</b> — light / paper<br><img src="images/theme-paper.png" width="330"></td>
+  </tr>
+  <tr>
+    <td align="center"><b>word55</b> — MS-DOS Word 5.5<br><img src="images/theme-word55.png" width="330"></td>
+    <td></td>
+  </tr>
+</table>
+
 ## Thanks
 
 Foolscap stands on many shoulders: the [LARBS](https://larbs.xyz) tradition
@@ -326,6 +345,25 @@ sichtbar, nichts wird versteckt oder umgebrochen.
 
 Die Farben folgen dem aktiven Thema (z. B. Gelb-auf-Blau im `wp51`-
 WordPerfect-Look). Abschalten mit `markdown_visuals = false`.
+
+### Themes
+
+Dasselbe Markdown, fünf Stimmungen — per `theme = "…"`:
+
+<table>
+  <tr>
+    <td align="center"><b>wp51</b> — WordPerfect 5.1<br><img src="images/theme-wp51.png" width="330"></td>
+    <td align="center"><b>amber</b> — Bernstein-CRT<br><img src="images/theme-amber.png" width="330"></td>
+  </tr>
+  <tr>
+    <td align="center"><b>green</b> — Grün-Phosphor<br><img src="images/theme-green.png" width="330"></td>
+    <td align="center"><b>paper</b> — hell / Papier<br><img src="images/theme-paper.png" width="330"></td>
+  </tr>
+  <tr>
+    <td align="center"><b>word55</b> — MS-DOS Word 5.5<br><img src="images/theme-word55.png" width="330"></td>
+    <td></td>
+  </tr>
+</table>
 
 ### Dank
 
