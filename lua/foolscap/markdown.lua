@@ -45,20 +45,25 @@ local function add_range(buf, row, from, to, group)
   end
 end
 
--- Eine Zeile optisch zentrieren, OHNE den Text zu ändern: ein inline-
--- Virtualtext (nur Leerzeichen) als linkes Polster schiebt die sichtbare Zeile
--- in die Mitte der Schreibspalte. Wie eine zentrierte Überschrift in
--- WordPerfect – die reale Zeile (inkl. "# ") bleibt unverändert.
-local function center_line(buf, row, line)
+-- H1 hervorheben UND zentrieren in EINEM Extmark. Das Highlight (inkl.
+-- Doppel-Unterstreichung) und das linke inline-Polster müssen zusammengehören:
+-- zwei getrennte Extmarks an Spalte 0 kollidieren, dann rendert die
+-- Unterstreichung versetzt zum Text (statt darunter). Die reale Zeile (inkl.
+-- "# ") bleibt unverändert – das Polster ist nur virtueller Leerraum.
+-- Wie eine zentrierte Überschrift in WordPerfect.
+local function center_h1(buf, row, line)
   local width = require("foolscap.config").options.width or 65
   local pad = math.floor((width - vim.fn.strdisplaywidth(line)) / 2)
-  if pad < 1 then return end
-  vim.api.nvim_buf_set_extmark(buf, ns, row, 0, {
-    virt_text = { { string.rep(" ", pad) } },
-    virt_text_pos = "inline",
-    right_gravity = false,
-    priority = 190,
-  })
+  local opts = {
+    end_col = #line,
+    hl_group = "FoolscapMarkdownH1",
+    priority = 200,
+  }
+  if pad >= 1 then
+    opts.virt_text = { { string.rep(" ", pad) } }
+    opts.virt_text_pos = "inline"
+  end
+  vim.api.nvim_buf_set_extmark(buf, ns, row, 0, opts)
 end
 
 local function mark_delimited(buf, row, line, marker, inner_group, marker_group)
@@ -113,8 +118,7 @@ local function refresh(buf)
   for row, line in ipairs(lines) do
     local i = row - 1
     if line:match("^#%s") then
-      add_range(buf, i, 0, #line, "FoolscapMarkdownH1")
-      center_line(buf, i, line) -- H1 wie in WordPerfect zentrieren
+      center_h1(buf, i, line) -- H1 hervorheben + zentrieren (ein Extmark)
     elseif line:match("^##%s") then
       add_range(buf, i, 0, #line, "FoolscapMarkdownH2")
     elseif line:match("^###%s") then
