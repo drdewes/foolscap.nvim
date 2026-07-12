@@ -15,6 +15,9 @@ M.defaults = {
   theme = "amber",
   -- Tages-Wortziel:
   goal = 1000,
+  -- Automatisch speichern, damit beim Schreiben nichts verloren geht.
+  -- Sichert benannte, echte Dateien still bei InsertLeave/TextChanged/FocusLost.
+  autosave = false,
   -- Dateitypen, für die der Prosa-Modus automatisch greift:
   filetypes = {
     "markdown", "markdown.pandoc", "vimwiki", "text", "tex", "asciidoc", "rst", "org",

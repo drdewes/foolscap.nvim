@@ -17,6 +17,7 @@ ROOT=$(dirname "$(dirname "$SELF")")
 # stderr nach /dev/null: unterdrückt die harmlose kitty-Warnung
 # "Could not move child process into a systemd scope" (i3 ohne systemd-Session).
 exec kitty 2>/dev/null \
+  --class "foolscap-wp" \
   --override "font_family=$FONT" \
   --override "font_size=$SIZE" \
   --override "remember_window_size=no" \
@@ -30,6 +31,7 @@ exec kitty 2>/dev/null \
   -e nvim \
     --cmd "set runtimepath^=$ROOT" \
     -c "lua require('foolscap.config').setup({ theme = 'wp51', width = 65 })" \
+    -c "lua require('foolscap.autosave').enable()" \
     -c "lua if vim.api.nvim_buf_get_name(0) == '' and vim.bo.filetype == '' then vim.bo.filetype = 'markdown' end" \
     -c "lua vim.defer_fn(function() require('foolscap').room() end, 60)" \
     "$@"

@@ -70,6 +70,8 @@ function M.setup(opts)
     })
   end
 
+  if cfg.autosave then require("foolscap.autosave").enable() end
+
   if cfg.keymaps then M.set_keymaps(cfg.keymap_prefix) end
 end
 
