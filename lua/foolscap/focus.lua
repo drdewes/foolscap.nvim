@@ -1,7 +1,7 @@
 -- Fokus: zentrierte Schreibspalte über zwei leere "Polster"-Fenster links/rechts.
 -- Dependency-frei (kein Goyo nötig), funktioniert in jedem Terminal.
 local M = {}
-local state = { active = false, pads = {}, main = nil }
+local state = { active = false, pads = {}, main = nil, au = nil }
 
 local function make_pad(win)
   local b = vim.api.nvim_create_buf(false, true)
@@ -38,15 +38,28 @@ function M.open(width)
   vim.api.nvim_win_set_width(right, pad)
 
   vim.api.nvim_set_current_win(main)
-  state = { active = true, pads = { left, right }, main = main }
+  state = { active = true, pads = { left, right }, main = main, au = nil }
+
+  -- Beim Beenden (ZZ/ZQ/:q) IM Textfenster zuerst die Rand-Polster schließen.
+  -- Dann schließt das eigentliche Quit das (nun letzte) Textfenster und beendet
+  -- neovim sauber – statt einen in einem leeren Polster-Fenster stranden zu lassen.
+  state.au = vim.api.nvim_create_autocmd("QuitPre", {
+    callback = function()
+      if state.active and vim.api.nvim_get_current_win() == state.main then
+        M.close()
+      end
+    end,
+    desc = "Foolscap: Polster beim Verlassen mitschließen",
+  })
 end
 
 function M.close()
   if not state.active then return end
+  if state.au then pcall(vim.api.nvim_del_autocmd, state.au) end
   for _, w in ipairs(state.pads) do
     if vim.api.nvim_win_is_valid(w) then pcall(vim.api.nvim_win_close, w, true) end
   end
-  state = { active = false, pads = {}, main = nil }
+  state = { active = false, pads = {}, main = nil, au = nil }
 end
 
 function M.toggle(width)
